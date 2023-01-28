@@ -1,11 +1,11 @@
-package com.besysoft.bootcamp.utilidad;
+package com.besysoft.bootcamp.util;
 
-import com.besysoft.bootcamp.dominio.Personaje;
+import com.besysoft.bootcamp.domain.Personaje;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PersonajeUtilidad {
+public class PersonajeUtil {
 
     public static List<Personaje> buscarPorFiltros(List<Personaje> personajes,
                                                    String nombre, Byte edad){
@@ -35,7 +35,7 @@ public class PersonajeUtilidad {
 
         validarEdad(desde);
         validarEdad(hasta);
-        ValidacionGeneralUtilidad.validarRangoDeNumeros(desde, hasta);
+        ValidacionGeneralUtil.validarRangoDeNumeros(desde, hasta);
 
         return personajes.stream()
                 .filter(p -> p.getEdad() >= desde && p.getEdad() <= hasta)

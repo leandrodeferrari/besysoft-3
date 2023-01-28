@@ -1,4 +1,4 @@
-package com.besysoft.bootcamp.dominio;
+package com.besysoft.bootcamp.domain;
 
 public class Genero {
 

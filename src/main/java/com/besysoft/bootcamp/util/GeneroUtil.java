@@ -1,10 +1,10 @@
-package com.besysoft.bootcamp.utilidad;
+package com.besysoft.bootcamp.util;
 
-import com.besysoft.bootcamp.dominio.Genero;
+import com.besysoft.bootcamp.domain.Genero;
 
 import java.util.List;
 
-public class GeneroUtilidad {
+public class GeneroUtil {
 
     public static void validarNombre(String nombre){
 

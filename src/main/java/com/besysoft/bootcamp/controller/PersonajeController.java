@@ -1,8 +1,8 @@
-package com.besysoft.bootcamp.controlador;
+package com.besysoft.bootcamp.controller;
 
-import com.besysoft.bootcamp.dominio.Personaje;
-import com.besysoft.bootcamp.utilidad.PersonajeUtilidad;
-import com.besysoft.bootcamp.utilidad.ValidacionGeneralUtilidad;
+import com.besysoft.bootcamp.domain.Personaje;
+import com.besysoft.bootcamp.util.PersonajeUtil;
+import com.besysoft.bootcamp.util.ValidacionGeneralUtil;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/personajes")
-public class PersonajeControlador {
+public class PersonajeController {
 
     private List<Personaje> personajes;
 
-    public PersonajeControlador() {
+    public PersonajeController() {
 
         this.personajes = new ArrayList<>(
                 Arrays.asList(
@@ -38,7 +38,7 @@ public class PersonajeControlador {
                                               @RequestParam(required = false) Byte edad){
 
         try {
-            return ResponseEntity.ok(PersonajeUtilidad.buscarPorFiltros(this.personajes, nombre, edad));
+            return ResponseEntity.ok(PersonajeUtil.buscarPorFiltros(this.personajes, nombre, edad));
         } catch(RuntimeException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -50,7 +50,7 @@ public class PersonajeControlador {
                                              @RequestParam Byte hasta){
 
         try {
-            return ResponseEntity.ok(PersonajeUtilidad.buscarPorEdades(this.personajes, desde, hasta));
+            return ResponseEntity.ok(PersonajeUtil.buscarPorEdades(this.personajes, desde, hasta));
         }catch (IllegalArgumentException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -62,7 +62,7 @@ public class PersonajeControlador {
 
         try {
 
-            PersonajeUtilidad.validar(personaje);
+            PersonajeUtil.validar(personaje);
             personaje.setId(this.personajes.size()+1L);
 
             this.personajes.add(personaje);
@@ -83,11 +83,11 @@ public class PersonajeControlador {
 
         try {
 
-            ValidacionGeneralUtilidad.validarId(id);
-            PersonajeUtilidad.validar(personaje);
+            ValidacionGeneralUtil.validarId(id);
+            PersonajeUtil.validar(personaje);
             personaje.setId(id);
 
-            if(PersonajeUtilidad.validarQueExistaPorId(this.personajes, id)){
+            if(PersonajeUtil.validarQueExistaPorId(this.personajes, id)){
 
                 for (Personaje p : this.personajes) {
 

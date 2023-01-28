@@ -1,13 +1,13 @@
-package com.besysoft.bootcamp.utilidad;
+package com.besysoft.bootcamp.util;
 
-import com.besysoft.bootcamp.dominio.PeliculaSerie;
+import com.besysoft.bootcamp.domain.PeliculaSerie;
 
 import java.time.LocalDate;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PeliculaSerieUtilidad {
+public class PeliculaSerieUtil {
 
     public static List<PeliculaSerie> buscarPorFiltros(List<PeliculaSerie> peliculasSeries,
                                                        String titulo, String nombreGenero){
@@ -35,9 +35,9 @@ public class PeliculaSerieUtilidad {
 
     public static List<PeliculaSerie> buscarPorFechas(List<PeliculaSerie> peliculasSeries, String desde, String hasta){
 
-        LocalDate fechaInicio = FechaUtilidad.formatear(desde);
-        LocalDate fechaFinal = FechaUtilidad.formatear(hasta);
-        FechaUtilidad.validarRango(fechaInicio, fechaFinal);
+        LocalDate fechaInicio = FechaUtil.formatear(desde);
+        LocalDate fechaFinal = FechaUtil.formatear(hasta);
+        FechaUtil.validarRango(fechaInicio, fechaFinal);
 
         return peliculasSeries.stream()
                 .filter(ps -> ps.getFechaDeCreacion().isAfter(fechaInicio.minusDays(1)) && ps.getFechaDeCreacion().isBefore(fechaFinal.plusDays(1)))
@@ -49,7 +49,7 @@ public class PeliculaSerieUtilidad {
 
         validarCalificacion(desde);
         validarCalificacion(hasta);
-        ValidacionGeneralUtilidad.validarRangoDeNumeros(desde, hasta);
+        ValidacionGeneralUtil.validarRangoDeNumeros(desde, hasta);
 
         return peliculasSeries.stream()
                 .filter(ps -> ps.getCalificacion() >= desde && ps.getCalificacion()<= hasta)
@@ -61,7 +61,7 @@ public class PeliculaSerieUtilidad {
 
         validarTitulo(peliculaSerie.getTitulo());
         validarCalificacion(peliculaSerie.getCalificacion());
-        FechaUtilidad.validar(peliculaSerie.getFechaDeCreacion());
+        FechaUtil.validar(peliculaSerie.getFechaDeCreacion());
 
     }
 

@@ -1,8 +1,8 @@
-package com.besysoft.bootcamp.controlador;
+package com.besysoft.bootcamp.controller;
 
-import com.besysoft.bootcamp.dominio.Genero;
-import com.besysoft.bootcamp.utilidad.GeneroUtilidad;
-import com.besysoft.bootcamp.utilidad.ValidacionGeneralUtilidad;
+import com.besysoft.bootcamp.domain.Genero;
+import com.besysoft.bootcamp.util.GeneroUtil;
+import com.besysoft.bootcamp.util.ValidacionGeneralUtil;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/generos")
-public class GeneroControlador {
+public class GeneroController {
 
     private List<Genero> generos;
 
-    public GeneroControlador() {
+    public GeneroController() {
 
         this.generos = new ArrayList<>(
                 Arrays.asList(
@@ -42,7 +42,7 @@ public class GeneroControlador {
 
         try {
 
-            GeneroUtilidad.validarNombre(genero.getNombre());
+            GeneroUtil.validarNombre(genero.getNombre());
             genero.setId(this.generos.size()+1L);
 
             this.generos.add(genero);
@@ -63,11 +63,11 @@ public class GeneroControlador {
 
         try {
 
-            ValidacionGeneralUtilidad.validarId(id);
-            GeneroUtilidad.validarNombre(genero.getNombre());
+            ValidacionGeneralUtil.validarId(id);
+            GeneroUtil.validarNombre(genero.getNombre());
             genero.setId(id);
 
-            if(GeneroUtilidad.validarQueExistaPorId(this.generos, id)){
+            if(GeneroUtil.validarQueExistaPorId(this.generos, id)){
 
                 this.generos.stream()
                         .filter(g -> g.getId().equals(id)).findFirst().get().setNombre(genero.getNombre());

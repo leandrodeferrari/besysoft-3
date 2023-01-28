@@ -1,12 +1,11 @@
-package com.besysoft.bootcamp.controlador;
+package com.besysoft.bootcamp.controller;
 
-import com.besysoft.bootcamp.dominio.Genero;
-import com.besysoft.bootcamp.dominio.PeliculaSerie;
-import com.besysoft.bootcamp.utilidad.FechaUtilidad;
-import com.besysoft.bootcamp.utilidad.PeliculaSerieUtilidad;
-import com.besysoft.bootcamp.utilidad.ValidacionGeneralUtilidad;
+import com.besysoft.bootcamp.domain.Genero;
+import com.besysoft.bootcamp.domain.PeliculaSerie;
+import com.besysoft.bootcamp.util.FechaUtil;
+import com.besysoft.bootcamp.util.PeliculaSerieUtil;
+import com.besysoft.bootcamp.util.ValidacionGeneralUtil;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +17,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/peliculas-series")
-public class PeliculaSerieControlador {
+public class PeliculaSerieController {
 
     private List<Genero> generos;
     private List<PeliculaSerie> peliculasSeries;
 
-    public PeliculaSerieControlador() {
+    public PeliculaSerieController() {
 
         this.generos = new ArrayList<>(
                 Arrays.asList(
@@ -36,12 +35,12 @@ public class PeliculaSerieControlador {
 
         this.peliculasSeries = new ArrayList<>(
                 Arrays.asList(
-                        new PeliculaSerie(1L, "Chucky", FechaUtilidad.formatear("12-12-2022"), (byte) 4, generos.get(0)),
-                        new PeliculaSerie(2L, "Annabelle", FechaUtilidad.formatear("10-01-2020"), (byte) 3, generos.get(0)),
-                        new PeliculaSerie(3L, "Jaula", FechaUtilidad.formatear("11-03-2021"), (byte) 4, generos.get(1)),
-                        new PeliculaSerie(4L, "Culpable", FechaUtilidad.formatear("25-07-2019"), (byte) 2, generos.get(2)),
-                        new PeliculaSerie(5L, "Viejos", FechaUtilidad.formatear("24-01-2023"), (byte) 5, generos.get(1)),
-                        new PeliculaSerie(6L, "CODA", FechaUtilidad.formatear("15-02-2020"), (byte) 1, generos.get(3))
+                        new PeliculaSerie(1L, "Chucky", FechaUtil.formatear("12-12-2022"), (byte) 4, generos.get(0)),
+                        new PeliculaSerie(2L, "Annabelle", FechaUtil.formatear("10-01-2020"), (byte) 3, generos.get(0)),
+                        new PeliculaSerie(3L, "Jaula", FechaUtil.formatear("11-03-2021"), (byte) 4, generos.get(1)),
+                        new PeliculaSerie(4L, "Culpable", FechaUtil.formatear("25-07-2019"), (byte) 2, generos.get(2)),
+                        new PeliculaSerie(5L, "Viejos", FechaUtil.formatear("24-01-2023"), (byte) 5, generos.get(1)),
+                        new PeliculaSerie(6L, "CODA", FechaUtil.formatear("15-02-2020"), (byte) 1, generos.get(3))
                 )
         );
 
@@ -53,7 +52,7 @@ public class PeliculaSerieControlador {
 
         try {
             return ResponseEntity.ok
-                    (PeliculaSerieUtilidad.buscarPorFiltros(this.peliculasSeries, titulo, nombreGenero));
+                    (PeliculaSerieUtil.buscarPorFiltros(this.peliculasSeries, titulo, nombreGenero));
         } catch(RuntimeException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -65,7 +64,7 @@ public class PeliculaSerieControlador {
                                              @RequestParam String hasta){
 
         try {
-            return ResponseEntity.ok(PeliculaSerieUtilidad.buscarPorFechas(this.peliculasSeries, desde, hasta));
+            return ResponseEntity.ok(PeliculaSerieUtil.buscarPorFechas(this.peliculasSeries, desde, hasta));
         } catch (IllegalArgumentException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -77,7 +76,7 @@ public class PeliculaSerieControlador {
                                                      @RequestParam Byte hasta){
 
         try {
-            return ResponseEntity.ok(PeliculaSerieUtilidad.buscarPorCalificaciones(this.peliculasSeries, desde, hasta));
+            return ResponseEntity.ok(PeliculaSerieUtil.buscarPorCalificaciones(this.peliculasSeries, desde, hasta));
         } catch (IllegalArgumentException ex){
             return ResponseEntity.badRequest().body(ex.getMessage());
         }
@@ -89,7 +88,7 @@ public class PeliculaSerieControlador {
 
         try {
 
-            PeliculaSerieUtilidad.validar(peliculaSerie);
+            PeliculaSerieUtil.validar(peliculaSerie);
             validarGenero(peliculaSerie);
             peliculaSerie.setId(this.peliculasSeries.size()+1L);
 
@@ -111,12 +110,12 @@ public class PeliculaSerieControlador {
 
         try {
 
-            ValidacionGeneralUtilidad.validarId(id);
-            PeliculaSerieUtilidad.validar(peliculaSerie);
+            ValidacionGeneralUtil.validarId(id);
+            PeliculaSerieUtil.validar(peliculaSerie);
             validarGenero(peliculaSerie);
             peliculaSerie.setId(id);
 
-            if(PeliculaSerieUtilidad.validarQueExistaPorId(this.peliculasSeries, id)){
+            if(PeliculaSerieUtil.validarQueExistaPorId(this.peliculasSeries, id)){
 
                 for (PeliculaSerie ps : this.peliculasSeries) {
 

@@ -1,6 +1,6 @@
-package com.besysoft.bootcamp.utilidad;
+package com.besysoft.bootcamp.util;
 
-public class ValidacionGeneralUtilidad {
+public class ValidacionGeneralUtil {
 
     public static void validarRangoDeNumeros(Byte desde, Byte hasta){
 
