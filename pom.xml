@@ -12,7 +12,7 @@
 	<artifactId>bootcamp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>bootcamp</name>
-	<description>Ejercicio 2 del bootcamp de Besysoft</description>
+	<description>Ejercicio 3 del bootcamp de Besysoft</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
