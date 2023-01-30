@@ -20,7 +20,7 @@ public class FechaUtil {
     public static void validarRango(LocalDate desde, LocalDate hasta){
 
         if(desde.compareTo(hasta) > 0){
-            throw new IllegalArgumentException("Rango de fecha inválida.");
+            throw new IllegalArgumentException("Rango de fecha inválido.");
         }
 
     }
