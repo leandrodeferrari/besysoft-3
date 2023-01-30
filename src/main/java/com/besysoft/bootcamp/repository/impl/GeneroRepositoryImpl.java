@@ -69,4 +69,9 @@ public class GeneroRepositoryImpl implements IGeneroRepository {
         return this.generos.stream().anyMatch(g -> g.getId().equals(id));
     }
 
+    @Override
+    public boolean existePorNombre(String nombre) {
+        return this.generos.stream().anyMatch(g -> g.getNombre().equalsIgnoreCase(nombre));
+    }
+
 }

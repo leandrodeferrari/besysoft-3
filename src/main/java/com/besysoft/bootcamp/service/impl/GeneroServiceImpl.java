@@ -30,13 +30,11 @@ public class GeneroServiceImpl implements IGeneroService {
 
         GeneroUtil.validarNombre(genero.getNombre());
 
-        Optional<Genero> optionalGenero = buscarPorNombre(genero.getNombre());
-
-        if(optionalGenero.isEmpty()){
-            return this.generoRepository.crear(genero);
-        } else {
+        if(this.generoRepository.existePorNombre(genero.getNombre())){
             throw new IllegalArgumentException("El genero ya existe.");
         }
+
+        return this.generoRepository.crear(genero);
 
     }
 
@@ -46,6 +44,10 @@ public class GeneroServiceImpl implements IGeneroService {
         ValidacionGeneralUtil.validarId(id);
         GeneroUtil.validarNombre(genero.getNombre());
         genero.setId(id);
+
+        if(this.generoRepository.existePorNombre(genero.getNombre())){
+            throw new IllegalArgumentException("Ya existe un genero con ese nombre.");
+        }
 
         return this.generoRepository.actualizar(id, genero);
 

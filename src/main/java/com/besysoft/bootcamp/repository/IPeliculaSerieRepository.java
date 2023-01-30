@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface IPeliculaSerieRepository {
@@ -17,7 +16,7 @@ public interface IPeliculaSerieRepository {
     List<PeliculaSerie> buscarPorCalificaciones(Byte desde, Byte hasta);
     PeliculaSerie crear(PeliculaSerie peliculaSerie);
     PeliculaSerie actualizar(Long id, PeliculaSerie peliculaSerie);
-    Optional<PeliculaSerie> buscarPorTitulo(String titulo);
     boolean existePorId(Long id);
+    boolean existePorTitulo(String titulo);
 
 }

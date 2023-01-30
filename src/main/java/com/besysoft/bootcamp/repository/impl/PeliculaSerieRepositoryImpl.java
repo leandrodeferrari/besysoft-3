@@ -13,7 +13,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -119,13 +118,13 @@ public class PeliculaSerieRepositoryImpl implements IPeliculaSerieRepository {
     }
 
     @Override
-    public Optional<PeliculaSerie> buscarPorTitulo(String titulo) {
-        return this.peliculasSeries.stream().filter(ps -> ps.getTitulo().equalsIgnoreCase(titulo)).findFirst();
+    public boolean existePorId(Long id) {
+        return this.peliculasSeries.stream().anyMatch(g -> g.getId().equals(id));
     }
 
     @Override
-    public boolean existePorId(Long id) {
-        return this.peliculasSeries.stream().anyMatch(g -> g.getId().equals(id));
+    public boolean existePorTitulo(String titulo) {
+        return this.peliculasSeries.stream().anyMatch(ps -> ps.getTitulo().equalsIgnoreCase(titulo));
     }
 
 }

@@ -60,10 +60,7 @@ public class PeliculaSerieServiceImpl implements IPeliculaSerieService {
 
         PeliculaSerieUtil.validar(peliculaSerie);
 
-        Optional<PeliculaSerie> optionalPeliculaSerie = this.peliculaSerieRepository
-                .buscarPorTitulo(peliculaSerie.getTitulo());
-
-        if(optionalPeliculaSerie.isPresent()){
+        if(this.peliculaSerieRepository.existePorTitulo(peliculaSerie.getTitulo())){
             throw new IllegalArgumentException("La pelicula/serie ya existe.");
         }
 
@@ -84,6 +81,10 @@ public class PeliculaSerieServiceImpl implements IPeliculaSerieService {
 
         ValidacionGeneralUtil.validarId(id);
         PeliculaSerieUtil.validar(peliculaSerie);
+
+        if(this.peliculaSerieRepository.existePorTitulo(peliculaSerie.getTitulo())){
+            throw new IllegalArgumentException("Ya existe una pelicula/serie con ese título.");
+        }
 
         Optional<Genero> optionalGenero = this.generoService.buscarPorNombre(peliculaSerie.getGenero().getNombre());
 
