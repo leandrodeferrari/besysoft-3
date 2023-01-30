@@ -58,13 +58,9 @@ public class PeliculaSerieController {
     public ResponseEntity<?> crear(@RequestBody PeliculaSerie peliculaSerie){
 
         try {
-
             return ResponseEntity.status(HttpStatus.CREATED).body(this.peliculaSerieService.crear(peliculaSerie));
-
         } catch (IllegalArgumentException ex){
-
             return ResponseEntity.badRequest().body(ex.getMessage());
-
         }
 
     }
@@ -74,13 +70,9 @@ public class PeliculaSerieController {
                                         @RequestBody PeliculaSerie peliculaSerie){
 
         try {
-
             return ResponseEntity.ok(this.peliculaSerieService.actualizar(id, peliculaSerie));
-
         } catch (IllegalArgumentException ex){
-
             return ResponseEntity.badRequest().body(ex.getMessage());
-
         }
 
     }

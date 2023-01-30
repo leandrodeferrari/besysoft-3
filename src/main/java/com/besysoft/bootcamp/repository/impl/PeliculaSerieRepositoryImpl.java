@@ -5,7 +5,6 @@ import com.besysoft.bootcamp.domain.PeliculaSerie;
 import com.besysoft.bootcamp.repository.IGeneroRepository;
 import com.besysoft.bootcamp.repository.IPeliculaSerieRepository;
 import com.besysoft.bootcamp.util.FechaUtil;
-import com.besysoft.bootcamp.util.PeliculaSerieUtil;
 
 import org.springframework.stereotype.Repository;
 
@@ -68,20 +67,16 @@ public class PeliculaSerieRepositoryImpl implements IPeliculaSerieRepository {
 
     @Override
     public List<PeliculaSerie> buscarPorFechas(LocalDate desde, LocalDate hasta) {
-
         return peliculasSeries.stream()
                 .filter(ps -> ps.getFechaDeCreacion().isAfter(desde.minusDays(1)) && ps.getFechaDeCreacion().isBefore(hasta.plusDays(1)))
                 .collect(Collectors.toList());
-
     }
 
     @Override
     public List<PeliculaSerie> buscarPorCalificaciones(Byte desde, Byte hasta) {
-
         return peliculasSeries.stream()
                 .filter(ps -> ps.getCalificacion() >= desde && ps.getCalificacion()<= hasta)
                 .collect(Collectors.toList());
-
     }
 
     @Override
@@ -98,9 +93,9 @@ public class PeliculaSerieRepositoryImpl implements IPeliculaSerieRepository {
     @Override
     public PeliculaSerie actualizar(Long id, PeliculaSerie peliculaSerie) {
 
-        if(PeliculaSerieUtil.validarQueExistaPorId(this.peliculasSeries, id)){
+        if(existePorId(id)){
 
-            for (PeliculaSerie ps : this.peliculasSeries) {
+            this.peliculasSeries.forEach((PeliculaSerie ps) -> {
 
                 if(ps.getId().equals(id)){
 
@@ -111,7 +106,7 @@ public class PeliculaSerieRepositoryImpl implements IPeliculaSerieRepository {
 
                 }
 
-            }
+            });
 
             return peliculaSerie;
 
@@ -126,6 +121,11 @@ public class PeliculaSerieRepositoryImpl implements IPeliculaSerieRepository {
     @Override
     public Optional<PeliculaSerie> buscarPorTitulo(String titulo) {
         return this.peliculasSeries.stream().filter(ps -> ps.getTitulo().equalsIgnoreCase(titulo)).findFirst();
+    }
+
+    @Override
+    public boolean existePorId(Long id) {
+        return this.peliculasSeries.stream().anyMatch(g -> g.getId().equals(id));
     }
 
 }

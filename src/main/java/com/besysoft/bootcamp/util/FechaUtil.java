@@ -32,7 +32,7 @@ public class FechaUtil {
         }
 
         if(fecha.isAfter(LocalDate.now())){
-            throw new IllegalArgumentException("La fecha, no puede ser del futuro.");
+            throw new IllegalArgumentException("La fecha no puede ser del futuro.");
         }
 
     }

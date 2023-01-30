@@ -70,13 +70,9 @@ public class PeliculaSerieServiceImpl implements IPeliculaSerieService {
         Optional<Genero> optionalGenero = this.generoService.buscarPorNombre(peliculaSerie.getGenero().getNombre());
 
         if(optionalGenero.isPresent()){
-
             peliculaSerie.setGenero(optionalGenero.get());
-
         } else {
-
-            throw new IllegalArgumentException("No existe género con ese nombre.");
-
+            throw new IllegalArgumentException("No existe genero con ese nombre.");
         }
 
         return this.peliculaSerieRepository.crear(peliculaSerie);
@@ -92,13 +88,9 @@ public class PeliculaSerieServiceImpl implements IPeliculaSerieService {
         Optional<Genero> optionalGenero = this.generoService.buscarPorNombre(peliculaSerie.getGenero().getNombre());
 
         if(optionalGenero.isPresent()){
-
             peliculaSerie.setGenero(optionalGenero.get());
-
         } else {
-
-            throw new IllegalArgumentException("No existe género con ese nombre.");
-
+            throw new IllegalArgumentException("No existe genero con ese nombre.");
         }
 
         peliculaSerie.setId(id);

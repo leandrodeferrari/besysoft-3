@@ -2,7 +2,6 @@ package com.besysoft.bootcamp.repository.impl;
 
 import com.besysoft.bootcamp.domain.Genero;
 import com.besysoft.bootcamp.repository.IGeneroRepository;
-import com.besysoft.bootcamp.util.GeneroUtil;
 
 import org.springframework.stereotype.Repository;
 
@@ -48,15 +47,11 @@ public class GeneroRepositoryImpl implements IGeneroRepository {
     @Override
     public Genero actualizar(Long id, Genero genero) {
 
-        if(GeneroUtil.validarQueExistaPorId(this.generos, id)){
-
+        if(existePorId(id)){
             this.generos.stream()
                     .filter(g -> g.getId().equals(id)).findFirst().get().setNombre(genero.getNombre());
-
         } else {
-
             throw new IllegalArgumentException("No existe genero con ese ID.");
-
         }
 
         return genero;
@@ -65,10 +60,13 @@ public class GeneroRepositoryImpl implements IGeneroRepository {
 
     @Override
     public Optional<Genero> buscarPorNombre(String nombre) {
-
         return this.generos.stream()
                 .filter(g -> g.getNombre().equalsIgnoreCase(nombre)).findFirst();
+    }
 
+    @Override
+    public boolean existePorId(Long id) {
+        return this.generos.stream().anyMatch(g -> g.getId().equals(id));
     }
 
 }

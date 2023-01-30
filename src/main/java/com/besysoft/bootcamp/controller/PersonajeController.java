@@ -45,13 +45,9 @@ public class PersonajeController {
     public ResponseEntity<?> crear(@RequestBody Personaje personaje){
 
         try {
-
             return ResponseEntity.status(HttpStatus.CREATED).body(this.personajeService.crear(personaje));
-
         } catch (IllegalArgumentException ex){
-
             return ResponseEntity.badRequest().body(ex.getMessage());
-
         }
 
     }
@@ -61,13 +57,9 @@ public class PersonajeController {
                                         @RequestBody Personaje personaje){
 
         try {
-
             return ResponseEntity.ok(this.personajeService.actualizar(id, personaje));
-
         } catch (IllegalArgumentException ex){
-
             return ResponseEntity.badRequest().body(ex.getMessage());
-
         }
 
     }

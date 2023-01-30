@@ -2,7 +2,6 @@ package com.besysoft.bootcamp.repository.impl;
 
 import com.besysoft.bootcamp.domain.Personaje;
 import com.besysoft.bootcamp.repository.IPersonajeRepository;
-import com.besysoft.bootcamp.util.PersonajeUtil;
 
 import org.springframework.stereotype.Repository;
 
@@ -56,11 +55,9 @@ public class PersonajeRepositoryImpl implements IPersonajeRepository {
 
     @Override
     public List<Personaje> buscarPorEdades(Byte desde, Byte hasta) {
-
         return personajes.stream()
                 .filter(p -> p.getEdad() >= desde && p.getEdad() <= hasta)
                 .collect(Collectors.toList());
-
     }
 
     @Override
@@ -77,9 +74,9 @@ public class PersonajeRepositoryImpl implements IPersonajeRepository {
     @Override
     public Personaje actualizar(Long id, Personaje personaje) {
 
-        if(PersonajeUtil.validarQueExistaPorId(this.personajes, id)){
+        if(existePorId(id)){
 
-            for (Personaje p : this.personajes) {
+            this.personajes.forEach((Personaje p) -> {
 
                 if(p.getId().equals(id)){
 
@@ -90,7 +87,7 @@ public class PersonajeRepositoryImpl implements IPersonajeRepository {
 
                 }
 
-            }
+            });
 
             return personaje;
 
@@ -100,6 +97,11 @@ public class PersonajeRepositoryImpl implements IPersonajeRepository {
 
         }
 
+    }
+
+    @Override
+    public boolean existePorId(Long id) {
+        return this.personajes.stream().anyMatch(g -> g.getId().equals(id));
     }
 
 }

@@ -2,8 +2,6 @@ package com.besysoft.bootcamp.util;
 
 import com.besysoft.bootcamp.domain.PeliculaSerie;
 
-import java.util.List;
-
 public class PeliculaSerieUtil {
 
     public static void validar(PeliculaSerie peliculaSerie){
@@ -32,10 +30,6 @@ public class PeliculaSerieUtil {
             throw new IllegalArgumentException("El título no puede ser nulo o vacío.");
         }
 
-    }
-
-    public static boolean validarQueExistaPorId(List<PeliculaSerie> peliculasSeries, Long id){
-        return peliculasSeries.stream().anyMatch(g -> g.getId().equals(id));
     }
 
 }

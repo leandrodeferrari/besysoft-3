@@ -28,13 +28,9 @@ public class GeneroController {
     public ResponseEntity<?> crear(@RequestBody Genero genero){
 
         try {
-
             return ResponseEntity.status(HttpStatus.CREATED).body(this.generoService.crear(genero));
-
         } catch (IllegalArgumentException ex){
-
             return ResponseEntity.badRequest().body(ex.getMessage());
-
         }
 
     }
@@ -44,13 +40,9 @@ public class GeneroController {
                                         @RequestBody Genero genero){
 
         try {
-
             return ResponseEntity.ok(this.generoService.actualizar(id, genero));
-
         } catch (IllegalArgumentException ex){
-
             return ResponseEntity.badRequest().body(ex.getMessage());
-
         }
 
     }

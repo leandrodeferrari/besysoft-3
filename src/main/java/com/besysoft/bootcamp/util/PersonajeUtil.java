@@ -2,8 +2,6 @@ package com.besysoft.bootcamp.util;
 
 import com.besysoft.bootcamp.domain.Personaje;
 
-import java.util.List;
-
 public class PersonajeUtil {
 
     public static void validar(Personaje personaje){
@@ -53,10 +51,6 @@ public class PersonajeUtil {
             throw new IllegalArgumentException("La historia no puede ser nula o vacía.");
         }
 
-    }
-
-    public static boolean validarQueExistaPorId(List<Personaje> personajes, Long id){
-        return personajes.stream().anyMatch(g -> g.getId().equals(id));
     }
 
 }

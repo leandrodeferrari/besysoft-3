@@ -18,5 +18,6 @@ public interface IPeliculaSerieRepository {
     PeliculaSerie crear(PeliculaSerie peliculaSerie);
     PeliculaSerie actualizar(Long id, PeliculaSerie peliculaSerie);
     Optional<PeliculaSerie> buscarPorTitulo(String titulo);
+    boolean existePorId(Long id);
 
 }

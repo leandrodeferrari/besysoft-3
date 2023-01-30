@@ -13,5 +13,6 @@ public interface IPersonajeRepository {
     List<Personaje> buscarPorEdades(Byte desde, Byte hasta);
     Personaje crear(Personaje personaje);
     Personaje actualizar(Long id, Personaje personaje);
+    boolean existePorId(Long id);
 
 }
